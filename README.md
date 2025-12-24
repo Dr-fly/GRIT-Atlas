@@ -1,11 +1,11 @@
 # GRIT-Atlas: A Comprehensive Treatment-Induced Resistance Atlas of Glioblastoma
 
-[![DOI](https://img.shields.io/badge/Dryad-10.5061/dryad.fbg79cp95-blue.svg)](https://doi.org/10.5061/dryad.fbg79cp95)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18009414.svg)](https://doi.org/10.5281/zenodo.18009414)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 This repository contains the complete computational pipeline for the **Glioblastoma Resistance Insights from Treatment Atlas (GRIT-Atlas)**. Our study utilizes an integrated single-cell and spatially resolved multi-omic approach to deconstruct the cellular and spatial logic of therapy-induced evolution in IDH-wildtype glioblastoma.
 
-## Scientific Highlights
+## 🌟 Scientific Highlights
 * **Scale and Scope**: We constructed a high-resolution integrated atlas encompassing **978,065 cells** from **296 samples**, capturing the full spectrum of disease evolution from primary diagnosis to recurrence post-standard-of-care and combinatorial immunotherapy.
 * **The Spatial Resistance Triad**: Using spatial transcriptomics across 48 patient sections, we identified a core functional unit composed of **cNMF7 (MES-like)** malignant cells, differentiation-arrested **E-MDSCs**, and Type VI Collagen-secreting **myCAFs**.
 * **Niche-Specific Resistance**: This triad specifically colonizes the hypoxic microvascular proliferation (**MVP**) and pseudopalisading necrosis (**PAN**) niches.
@@ -13,59 +13,61 @@ This repository contains the complete computational pipeline for the **Glioblast
 
 ---
 
-## Repository Organization
+## 📂 Repository Organization
 
 The analysis is modularized into four key computational stages:
 
-| Script Name | Analysis Module | Primary Methodology |
-| :--- | :--- | :--- |
-| `1_Single_Cell_Preprocessing.ipynb` | Atlas Construction | Standardized QC, technical covariate regression, and BBKNN-based batch integration. |
-| `2_Malignant_cNMF_Analysis.ipynb` | Malignant Phenotyping | Consensus Non-negative Matrix Factorization (cNMF) to delineate 11 functional states. |
-| `3_Spatial_Landscape_Analysis.R` | Spatial Modeling | RCTD-based cell type deconvolution and MistyR multi-view spatial relationship inference. |
-| `4_Niche_Validation.R` | Signaling & Gradients | CellChat-mediated ligand-receptor network inference and histological gradient screening. |
+| Script Name | Analysis Module | Primary Methodology | Linked Data Files |
+| :--- | :--- | :--- | :--- |
+| `1_Single_Cell_Preprocessing.ipynb` | Atlas Construction | QC, Covariate Regression, BBKNN | `IntegratedData.zip` |
+| `2_Malignant_cNMF_Analysis.ipynb` | Malignant Phenotyping | Consensus NMF (cNMF) | `Malignant.qs` |
+| `3_Spatial_Landscape_Analysis.R` | Spatial Modeling | RCTD & MistyR | `GRIT-Atlas_RCTDres.zip`, `Merge_RCTDInput.qs` |
+| `4_Niche_Validation.R` | Signaling & Gradients | CellChat & SPATA2 | `CellChat.zip`, Lineage-specific files |
 
 ---
 
-## Data Access & File Structure
+## 📊 Data Access (Zenodo)
 
-All processed data objects required to reproduce the findings are hosted on **Dryad**:
-🔗 **[DOI: 10.5061/dryad.fbg79cp95](https://doi.org/10.5061/dryad.fbg79cp95)**
+All processed data objects required to reproduce the findings are hosted on **Zenodo**:
+🔗 **[DOI: 10.5281/zenodo.18009414](https://doi.org/10.5281/zenodo.18009414)**
 
 ### 1. Global Integrated Data
-* **`IntegratedData.zip`**: The master Seurat/AnnData object for the complete GRIT-Atlas (978,065 cells). Includes batch-corrected UMAP coordinates, treatment status (pGBM, rGBM-R+C, rGBM-ICB, rGBM-ICB+Target), and lineage annotations.
+* **`IntegratedData.zip`**: The master Seurat/AnnData object for the complete GRIT-Atlas (978,065 cells). Includes batch-corrected UMAP coordinates, treatment status (pGBM, rGBM-R+C, rGBM-ICB, rGBM-ICB+Target), clinical response, and lineage annotations.
 
-### 2. Lineage-Specific Objects (High-Resolution)
-* **`Malignant.qs`**: Details the 11 malignant functional states (cNMF), including the resistance-associated **cNMF7 (MES-like)** and NEU states.
+### 2. High-Resolution Lineage Objects
+* **`Malignant.qs`**: Details 11 functional states (cNMF), including the resistance-associated **cNMF7 (MES-like)** state and Neuron-like (NEU) states.
 * **`Myeloid.zip`**: High-resolution subclustering of 349,583 myeloid cells (23 subpopulations), highlighting **E-MDSC.ADM.HIF1A** and Mono.CD14.FCGR3A.
 * **`Lymphocyte.zip`**: Detailed annotations for 36 lymphoid subsets, including cytotoxic T cells, exhausted T cells (**Tex.03.ALDOA.MIF**), and Tregs.
-* **`Stroma.qs`**: Characterization of CAFs, pericytes, and SMCs, specifically the **myCAF.02.COL6** subset.
-* **`Endothelial.qs`**: High-resolution mapping of the EC compartment, including immune-resistant subsets (**Vein.VCAM1** and **Arterial.01.DKK2**).
+* **`Stroma.qs`**: Processed stromal compartment (CAFs, Pericytes, SMCs), specifically annotating the **myCAF.02.COL6** subset.
+* **`Endothelial.qs`**: High-resolution mapping of ECs, characterizing immune-resistant subsets (**Vein.VCAM1** and **Arterial.01.DKK2**).
 
-### 3. Spatial Transcriptomics (10x Visium)
-* **`GRIT-Atlas_RCTDres.zip`**: Comprehensive deconvolution results (RCTD weight matrices) and MistyR spatial importance values for 48 patient sections.
-* **`Merge_RCTDInput.qs`**: The optimized scRNA-seq reference object used as the input for RCTD deconvolution.
-
-### 4. Cell-Cell Communication
-* **`CellChat.zip`**: Processed CellChat objects documenting the signaling networks within the **"Spatial Resistance Triad"**. Includes three specific sub-objects:
-    * `Secreted`: Paracrine/autocrine signaling.
-    * `ECM`: Collagen-CD44/Integrin axes (the fibrotic shield).
-    * `CCC`: Cell-cell contact-dependent signaling.
+### 3. Spatial Transcriptomics & Communication
+* **`GRIT-Atlas_RCTDres.zip`**: RCTD weight matrices and MistyR importance values for 48 glioblastoma patient sections (10x Visium).
+* **`Merge_RCTDInput.qs`**: Optimized scRNA-seq reference object used for RCTD deconvolution.
+* **`CellChat.zip`**: Processed objects documenting communication within the "Spatial Resistance Triad." Includes sub-objects for **Secreted Signaling**, **ECM-Receptor** (e.g., Collagen-CD44 axis), and **Cell-Cell Contact**.
 
 ---
 
-## Software Requirements
+## 💻 Software Requirements
 
-The GRIT-Atlas pipeline is implemented in a hybrid **Python (v3.10.12)** and **R (v4.3.2)** environment.
+### **Python Environment (v3.10+)**
+Used for atlas construction and malignant state characterization:
+* `scanpy` (v1.10.1): QC and normalization.
+* `bbknn` (v1.6.0): Large-scale batch correction.
+* `omicverse` (v1.6.10): Pearson residuals scaling and cNMF decomposition.
+* `infercnvpy` (v0.5.0): CNV-based malignant cell identification.
 
-### **Python Libraries**
-* `scanpy` (v1.10.1), `bbknn` (v1.6.0), `omicverse` (v1.6.10), `infercnvpy` (v0.5.0).
-
-### **R Packages**
-* `Seurat` (v4.3.0), `spacexr` (v2.2.0), `mistyR` (v1.10.0), `CellChat` (v1.6.1), `SPATA2` (v3.1.0).
+### **R Environment (v4.3+)**
+Used for spatial modeling and signaling inference:
+* `Seurat` (v4.3.0): Core framework.
+* `spacexr` (RCTD v2.2.0): Cell type deconvolution.
+* `mistyR` (v1.10.0): Multi-view spatial relationship inference.
+* `CellChat` (v1.6.1): Ligand-receptor communication modeling.
+* `SPATA2` (v3.1.0): Niche-specific histological gradient screening.
 
 ---
 
-## Citation
+## 📝 Citation
 
 If you utilize the GRIT-Atlas code or data, please cite our manuscript:
 
@@ -73,8 +75,11 @@ If you utilize the GRIT-Atlas code or data, please cite our manuscript:
 
 **Contact**:
 **Fei Wang, MD**
-Department of Neurosurgery, the First Affiliated Hospital of Soochow University
+Department of Neurosurgery & Brain and Nerve Research Laboratory
+The First Affiliated Hospital of Soochow University
 Email: [wangfeineu@163.com](mailto:wangfeineu@163.com)
 
 ---
-**License**: Code (MIT) | Data (CC0).
+**License**: 
+* **Code**: MIT License.
+* **Data**: Creative Commons Zero (CC0) / Public Domain.
