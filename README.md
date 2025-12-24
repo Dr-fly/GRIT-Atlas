@@ -21,8 +21,8 @@ The analysis is modularized into four key computational stages:
 | :--- | :--- | :--- | :--- |
 | `1_Single_Cell_Preprocessing.ipynb` | Atlas Construction | QC, Covariate Regression, BBKNN | `IntegratedData.zip` |
 | `2_Malignant_cNMF_Analysis.ipynb` | Malignant Phenotyping | Consensus NMF (cNMF) | `Malignant.qs` |
-| `3_Spatial_Landscape_Analysis.R` | Spatial Modeling | RCTD & MistyR | `GRIT-Atlas_RCTDres.zip`, `Merge_RCTDInput.qs` |
-| `4_Niche_Validation.R` | Signaling & Gradients | CellChat & SPATA2 | `CellChat.zip`, Lineage-specific files |
+| `3_Spatial_Landscape_Analysis.R` | Spatial Modeling and Signaling & Gradients | RCTD & MistyR & SPATA2 | `GRIT-Atlas_RCTDres.zip`, `Merge_RCTDInput.qs` |
+| `4_Niche_Validation.R` | Niche communications | Lineage-specific files |  `CellChat.zip` |
 
 ---
 
