@@ -74,7 +74,7 @@ All processed data objects required to reproduce the findings are hosted on **Ze
 
 If you utilize the GRIT-Atlas code or data, please cite our manuscript:
 
-> **Wang F, et al.** (2025). *A Comprehensive Treatment-Induced Resistance Atlas of Glioblastoma Reveals a Fibrotic Niche Shielding the Tumor from Immunotherapy.*
+> **Wang F, et al.** (2025). *A Comprehensive Treatment-Induced Resistance Atlas of Glioblastoma Reveals a Fibrotic Niche Shielding the Tumor from Immunotherapy.bioRxiv 2025.12.25.696471; doi: https://doi.org/10.64898/2025.12.25.696471*
 
 **Contact**:
 **Fei Wang, MD**
