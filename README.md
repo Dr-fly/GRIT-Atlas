@@ -1,28 +1,29 @@
-# GRIT-Atlas: A Comprehensive Treatment-Induced Resistance Atlas of Glioblastoma
+# GRIT-Atlas: A Single-Cell and Spatial Atlas of MVP-PAN Evolution Reveals a Desmoplastic Dependency to Overcome Glioblastoma Resistance
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18009414.svg)](https://zenodo.org/records/18009414)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-This repository contains the complete computational pipeline for the **Glioblastoma Resistance Insights from Treatment Atlas (GRIT-Atlas)**. Our study utilizes an integrated single-cell and spatially resolved multi-omic approach to deconstruct the cellular and spatial logic of therapy-induced evolution in IDH-wildtype glioblastoma.
+This repository contains the complete computational pipeline and resource links for our study, **"A Single-Cell and Spatial Atlas of MVP-PAN Evolution Reveals a Desmoplastic Dependency to Overcome Glioblastoma Resistance."** By integrating a massive single-cell compendium (GRIT-Atlas) with high-plex spatial molecular imaging (CosMx SMI), we deconstruct the spatiotemporal evolution of therapy-induced resistance in IDH-wildtype glioblastoma.
 
 ## 🌟 Scientific Highlights
-* **Scale and Scope**: We constructed a high-resolution integrated atlas encompassing **978,065 cells** from **296 samples**, capturing the full spectrum of disease evolution from primary diagnosis to recurrence post-standard-of-care (SOC) and combinatorial immunotherapy (ICB + anti-angiogenic therapy).
-* **The Spatial Resistance Triad**: Using spatial transcriptomics across 48 patient sections, we identified a core functional unit composed of **cNMF7 (MES-like)** malignant cells, differentiation-arrested **E-MDSCs**, and Type VI Collagen-secreting **myCAFs**.
-* **Niche-Specific Resistance**: This triad specifically colonizes the hypoxic microvascular proliferation (**MVP**) and pseudopalisading necrosis (**PAN**) niches.
-* **Mechanistic Insight**: We demonstrate that myCAFs function as stromal architects, constructing a fibrotic scaffold via the **Collagen/Fibronectin-CD44 signaling axis** to physically exclude cytotoxic T cells and sustain malignant plasticity.
+* **Scale and Scope**: We constructed the comprehensive GRIT-Atlas encompassing **978,065 single cells** from 296 samples, seamlessly integrated with **high-plex CosMx SMI spatial transcriptomics across 406,689 cells** to achieve true single-cell spatial resolution.
+* **Deconstructing MVP-PAN Evolution**: We unmasked a deterministic spatiotemporal continuum proving that Pseudopalisading Necrosis (PAN) is the direct pathophysiological consequence of dysfunctional Microvascular Proliferation (MVP).
+* **The COL6A1-CD44 Structural Sanctuary**: Stromal cancer-associated fibroblasts (CAFs) act as the primary engine pumping out global extracellular COL6A1, creating a mechanical matrix scar that engages CD44 on MES-like malignant cells to sustain tumor stemness even during vascular collapse.
+* **Preclinical Translation via Repurposing**: We identified **Lacidipine**, an FDA-approved blood-brain barrier-penetrant antihypertensive agent, as a potent inhibitor of CAF-mediated COL6A1 secretion, successfully dismantling the desmoplastic niche and overcoming resistance in vivo.
 
 ---
 
 ## 📂 Repository Organization
 
-The analysis is modularized into four key computational stages:
+The computational workflow is modularized into five core analytical stages:
 
-| Script Name | Analysis Module | Primary Methodology | Linked Data Files |
-| :--- | :--- | :--- | :--- |
-| `1_Single_Cell_Preprocessing.ipynb` | Atlas Construction | QC, Covariate Regression, BBKNN | `IntegratedData.zip` |
-| `2_Malignant_cNMF_Analysis.ipynb` | Malignant Phenotyping | Consensus NMF (cNMF) | `Malignant.qs` |
-| `3_Spatial_Landscape_Analysis.R` | Spatial Modeling & Gradients | RCTD, MistyR, and SPATA2 | `GRIT-Atlas_RCTDres.zip` |
-| `4_Niche_Validation.R` | Niche Communications | CellChat Modeling | `CellChat.zip` |
+| Script Name | Analysis Module | Primary Methodology | 
+| :--- | :--- | :--- | 
+| `1_Single_Cell_Preprocessing_and_Batch_Correction.ipynb` | GRIT-Atlas Construction | QC, Covariate Regression, BBKNN | 
+| `2_Malignant_Functional_State_Characterization_via_cNMF.ipynb` | Malignant Phenotyping | Consensus NMF (cNMF) | 
+| `3_Spatial_Landscape_Analysis_and_Niche_Characterization.R` | Visium Spatial Modeling | RCTD, MistyR, and SPATA2 |
+| `4_Cell_Communication_and_Spatial_Niche_Validation.R` | Cell-Cell Interactions | CellChat Modeling |
+| `5_MES_Spatial_Niche_Architecture_Analysis.R` | High-Plex CosMx Spatial Niche Mapping | KNN-Neighborhood Extraciton, NMF, Consensus Clustering | 
 
 ---
 
@@ -31,19 +32,20 @@ The analysis is modularized into four key computational stages:
 All processed data objects required to reproduce the findings are hosted on **Zenodo**:
 🔗 **[Direct Link: https://zenodo.org/records/18009414](https://zenodo.org/records/18009414)**
 
-### 1. Global Integrated Data
-* **`IntegratedData.zip`**: The master Seurat/AnnData object for the complete GRIT-Atlas (978,065 cells). Includes batch-corrected UMAP coordinates, treatment status, clinical response labels, and lineage annotations.
+### 1. Global Single-Cell Data (GRIT-Atlas)
+* **`IntegratedData.zip`**: The master Seurat/AnnData object (978,065 cells) including batch-corrected UMAP coordinates, treatment metadata, and lineage annotations.
+* **`Sub-lineage Objects`**: High-resolution specialized `.qs` and `.zip` objects for the Malignant (including cNMF states), Myeloid, Lymphoid, Stromal, and Endothelial compartments.
 
-### 2. High-Resolution Lineage Objects
-* **`Malignant.qs`**: Details 11 functional states (cNMF), including the resistance-associated **cNMF7 (MES-like)** state and malignant Neuron-like (NEU) states.
-* **`Myeloid.zip`**: High-resolution subclustering of 349,583 myeloid cells (23 subpopulations), highlighting **E-MDSC.ADM.HIF1A**.
-* **`Lymphocyte.zip`**: Detailed annotations for 36 lymphoid subsets, including cytotoxic T cells and exhausted **Tex.03.ALDOA.MIF**.
-* **`Stroma.qs`**: Processed stromal compartment (CAFs, Pericytes, SMCs), specifically annotating the **myCAF.02.COL6** subset.
-* **`Endothelial.qs`**: High-resolution mapping of ECs, characterizing immune-resistant subsets (**Vein.VCAM1** and **Arterial.01.DKK2**).
+### 2. Visium Spatial & Communication Context
+* **`GRIT-Atlas_RCTDres.zip`**: RCTD weight matrices and MistyR spatial importance values for 48 glioblastoma patient Visium sections.
+* **`CellChat.zip`**: Processed interactome objects validating the **COL6A1-CD44 signaling axis**.
 
-### 3. Spatial Transcriptomics & Communication
-* **`GRIT-Atlas_RCTDres.zip`**: RCTD weight matrices and MistyR importance values for 48 glioblastoma patient sections (10x Visium).
-* **`CellChat.zip`**: Processed objects documenting communication within the "Spatial Resistance Triad," focused on the **Collagen-CD44 axis**.
+### 3. High-Plex Spatial Molecular Imaging (CosMx SMI)
+* **`CosMx_SMI_Global.zip`**: Sample-specific Seurat v5 objects for the high-plex spatial transcriptomics data, fully annotated with global cell-type identities.
+* **`CosMx_SMI_MES_Niches.zip`**: Sample-specific Seurat v5 objects focused exclusively on the MES-like malignant domains, deeply annotated with the identified spatial architectural niches (S1–S3).
+
+### 4. In Vivo Validation scRNA-seq
+* **`In_Vivo_Mice_scRNA_StandardFiles.zip`**: The standard expression files for the in vivo orthotopic mouse glioblastoma cohort evaluating the therapeutic efficacy of the Lacidipine triple-combination regimen.
 
 ---
 
@@ -52,36 +54,48 @@ All processed data objects required to reproduce the findings are hosted on **Ze
 ### **Python Environment (v3.10+)**
 * `scanpy` (v1.10.1): QC and normalization.
 * `bbknn` (v1.6.0): Large-scale batch correction.
-* `omicverse` (v1.6.10): Pearson residuals scaling and cNMF decomposition.
-* `infercnvpy` (v0.5.0): CNV-based malignant cell identification.
+* `omicverse` (v1.6.10): Pearson residuals scaling and cNMF.
+* `infercnvpy` (v0.5.0): CNV-based malignant cell inference.
 
 ### **R Environment (v4.3+)**
-* `Seurat` (v4.3.0): Core framework.
+* `Seurat` (v5.0.0+): Core framework (Essential for CosMx SMI data).
 * `spacexr` (RCTD v2.2.0): Cell type deconvolution.
 * `mistyR` (v1.10.0): Multi-view spatial relationship inference.
 * `CellChat` (v1.6.1): Ligand-receptor communication modeling.
-* `SPATA2` (v3.1.0): Niche-specific histological gradient screening.
+* `RcppML`(v0.3.7) & `FNN`(v1.1.4.1): Optimized NMF and K-Nearest Neighbors spatial niche extraction.
 
 ---
 
-## 📝 Author Contributions
+## 👥 Author Contributions (CRediT)
 
-**F.W.**, **Z.C.**, and **Z.W.** conceived and designed the study. **F.W.** led the development of methodologies and computational software with support from **R.H.** and **H.L.**. Formal data analysis and visualization were performed by **F.W.**, **R.H.**, **H.L.**, **Y.B.**, **C.Y.**, and **G.Z.**. **F.W.** coordinated the investigation and resource collection with significant contributions from **X.W.**, **W.C.**, **Y.L.**, **Y.N.Z.**, **D.L.**, **Y.Q.**, **J.Z.**, **B.G.**, **C.M.**, **H.D.**, **Y.B.Y.**, **Y.L.Z.**, and **T.S.**. Data curation was managed by **F.W.**, **R.H.**, **H.L.**, and **Y.B.**. **F.W.** wrote the original draft of the manuscript, and **F.W.**, **Z.C.**, and **Z.W.** performed critical revisions and intellectual editing. Overall project supervision and funding acquisition were provided by **Z.C.** and **Z.W.**.
+* **Conceptualization:** Fei Wang, Zhouqing Chen, Zhong Wang.
+* **Data curation:** Fei Wang, Xin Wu, Guozheng Zhao, Run Huang.
+* **Formal analysis:** Fei Wang, Xin Wu, Guozheng Zhao, Run Huang, Chen Yang, Yuhan Bai.
+* **Funding acquisition:** Zhouqing Chen, Zhong Wang, Fei Wang.
+* **Investigation:** Fei Wang, Xin Wu, Guozheng Zhao, Run Huang, Chen Yang, Yuhan Bai, Wenqian Cao, Yue Lu, Guangling Xu, Haohao Qiu, Hongyi Ling, Dengfeng Lu, Youjia Qiu, Juyi Zhang, Bixi Gao.
+* **Methodology:** Fei Wang, Xin Wu, Guozheng Zhao, Run Huang, Yanbo Yang, Ting Sun.
+* **Project administration:** Zhouqing Chen, Zhong Wang.
+* **Resources:** Zhouqing Chen, Zhong Wang, Ting Sun.
+* **Software:** Xin Wu, Run Huang, Chen Yang.
+* **Supervision:** Zhouqing Chen, Zhong Wang.
+* **Validation:** Fei Wang, Xin Wu, Guozheng Zhao, Run Huang, Wenqian Cao, Yue Lu.
+* **Visualization:** Fei Wang, Xin Wu, Guozheng Zhao, Run Huang.
+* **Writing – original draft:** Fei Wang, Xin Wu, Guozheng Zhao, Run Huang.
+* **Writing – review & editing:** Zhouqing Chen, Zhong Wang, Fei Wang, Yanbo Yang, Ting Sun.
 
 ---
 
 ## 📝 Citation
 
-If you utilize the GRIT-Atlas code or data, please cite our manuscript:
+If you utilize the code or data from this repository, please cite our manuscript. Note: A preliminary version of this work highlighting the initial single-cell atlas construction has been deposited as a preprint:
 
-> **Wang F, et al.** (2025). *A Comprehensive Treatment-Induced Resistance Atlas of Glioblastoma Reveals a Fibrotic Niche Shielding the Tumor from Immunotherapy.bioRxiv 2025.12.25.696471; doi: https://doi.org/10.64898/2025.12.25.696471*
+> **Wang F, et al.** (2025). *A Comprehensive Treatment-Induced Resistance Atlas of Glioblastoma Reveals a Fibrotic Niche Shielding the Tumor from Immunotherapy.* bioRxiv. doi: [10.64898/2025.12.25.696471](https://doi.org/10.64898/2025.12.25.696471)
 
-**Contact**:
-**Fei Wang, MD**
-Department of Neurosurgery & Brain and Nerve Research Laboratory, The First Affiliated Hospital of Soochow University
-Email: [wangfeineu@163.com](mailto:wangfeineu@163.com)
+**Contact**:  
+**Fei Wang, MD** Department of Neurosurgery & Brain and Nerve Research Laboratory, The First Affiliated Hospital of Soochow University  
+Email: [wangfeineu@163.com](mailto:wangfeineu@163.com)  
 
 ---
-**License**: 
+**License**:  
 * **Code**: [MIT License](https://opensource.org/licenses/MIT).
 * **Data**: [Creative Commons Zero (CC0)](https://creativecommons.org/publicdomain/zero/1.0/).
