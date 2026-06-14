@@ -23,7 +23,7 @@ The computational workflow is modularized into five core analytical stages:
 | `2_Malignant_Functional_State_Characterization_via_cNMF.ipynb` | Malignant Phenotyping | Consensus NMF (cNMF) | 
 | `3_Spatial_Landscape_Analysis_and_Niche_Characterization.R` | Visium Spatial Modeling | RCTD, MistyR, and SPATA2 |
 | `4_Cell_Communication_and_Spatial_Niche_Validation.R` | Cell-Cell Interactions | CellChat Modeling |
-| `5_MES_Spatial_Niche_Architecture_Analysis.R` | High-Plex CosMx Spatial Niche Mapping | KNN-Neighborhood Extraciton, NMF, Consensus Clustering | 
+| `5_Spatial_Niche_Architecture_Analysis_For_MESlike_Cells.R` | High-Plex CosMx Spatial Niche Mapping | KNN-Neighborhood Extraciton, NMF, Consensus Clustering | 
 
 ---
 
