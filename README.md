@@ -41,11 +41,11 @@ All processed data objects required to reproduce the findings are hosted on **Ze
 * **`CellChat.zip`**: Processed interactome objects validating the **COL6A1-CD44 signaling axis**.
 
 ### 3. High-Plex Spatial Molecular Imaging (CosMx SMI)
-* **`CosMx_SMI_Global.zip`**: Sample-specific Seurat v5 objects for the high-plex spatial transcriptomics data, fully annotated with global cell-type identities.
-* **`CosMx_SMI_MES_Niches.zip`**: Sample-specific Seurat v5 objects focused exclusively on the MES-like malignant domains, deeply annotated with the identified spatial architectural niches (S1–S3).
+* **`Annotated_SeuratV5.zip`**: Sample-specific Seurat v5 objects for the high-plex spatial transcriptomics data, fully annotated with global cell-type identities.
+* **`Annotated_SeuratV5_MESlike_NicheAnnotation.zip`**: Sample-specific Seurat v5 objects focused exclusively on the MES-like malignant domains, deeply annotated with the identified spatial architectural niches (S1–S3).
 
 ### 4. In Vivo Validation scRNA-seq
-* **`In_Vivo_Mice_scRNA_StandardFiles.zip`**: The standard expression files for the in vivo orthotopic mouse glioblastoma cohort evaluating the therapeutic efficacy of the Lacidipine triple-combination regimen.
+* **`GL261_scRNAseq.zip`**: The standard expression files for the in vivo orthotopic mouse glioblastoma cohort evaluating the therapeutic efficacy of the Lacidipine triple-combination regimen.
 
 ---
 
@@ -59,7 +59,7 @@ All processed data objects required to reproduce the findings are hosted on **Ze
 
 ### **R Environment (v4.3+)**
 * `Seurat` (v5.0.0+): Core framework (Essential for CosMx SMI data).
-* `spacexr` (RCTD v2.2.0): Cell type deconvolution.
+* `spacexr` (v2.2.0): Cell type deconvolution (RCTD).
 * `mistyR` (v1.10.0): Multi-view spatial relationship inference.
 * `CellChat` (v1.6.1): Ligand-receptor communication modeling.
 * `RcppML`(v0.3.7) & `FNN`(v1.1.4.1): Optimized NMF and K-Nearest Neighbors spatial niche extraction.
